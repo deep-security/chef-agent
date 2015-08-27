@@ -1,5 +1,3 @@
-deep-security-agent Cookbook
-============================
 A collection of recipes to help deploy and manage the Deep Security agent.
 
 ## Requirements

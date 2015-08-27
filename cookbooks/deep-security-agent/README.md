@@ -1,17 +1,12 @@
 deep-security-agent Cookbook
 ============================
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+A collection of recipes to help deploy and manage the Deep Security agent.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+All of the recipes in this cookbook require a working Deep Security infrastructure. The key component is the Deep Security manager. The agents (which these recipes help you manager) do the heavy lifting but the manager gives the marching orders. 
 
-e.g.
-#### packages
-- `toaster` - deep-security-agent needs toaster to brown your bagel.
+There are no specific technical requirements beyond a standard Chef deployment.
 
 Attributes
 ----------

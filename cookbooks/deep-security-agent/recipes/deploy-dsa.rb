@@ -15,7 +15,7 @@ require 'tmpdir'
 
 # Expected attributes:
 # {
-#    "dsm_agent_download_hostname": "app.deepsecurity.trendmicro.com:443",
+#    "dsm_agent_download_hostname": "app.deepsecurity.trendmicro.com",
 #    "dsm_agent_download_port": 443,
 #    "ignore_ssl_validation": false,
 #    "dsm_agent_activation_hostname": "agents.deepsecurity.trendmicro.com",
@@ -31,7 +31,7 @@ require 'tmpdir'
 # As you add agents to Deep Security, they are automatically made available for download through
 #   the same hostname:port as the admin interface. For Marketplace AMI and software deployments, pass
 #   this data through the 'dsm_agent_download_hostname' & 'dsm_agent_download_port' attributes
-dsm_agent_download_hostname = node.has_key?(:dsm_agent_download_hostname) ? node[:dsm_agent_download_hostname] : "app.deepsecurity.trendmicro.com:443"
+dsm_agent_download_hostname = node.has_key?(:dsm_agent_download_hostname) ? node[:dsm_agent_download_hostname] : "app.deepsecurity.trendmicro.com"
 dsm_agent_download_port = node.has_key?(:dsm_agent_download_port) ? node[:dsm_agent_download_port] : 443
 # For Marketplace AMI and software deployments 'ignore_ssl_validation' must to set to 'true' 
 #    unless you've installed a verifiable SSL certificate

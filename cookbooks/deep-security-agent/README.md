@@ -2,17 +2,14 @@ deep-security-agent Cookbook
 ============================
 A collection of recipes to help deploy and manage the Deep Security agent.
 
-Requirements
-------------
+## Requirements
+
 All of the recipes in this cookbook require a working Deep Security infrastructure. The key component is the Deep Security manager. The agents (which these recipes help you manager) do the heavy lifting but the manager gives the marching orders. 
 
 There are no specific technical requirements beyond a standard Chef deployment.
 
-Attributes
-----------
-TODO: List your cookbook attributes here.
+## Attributes
 
-e.g.
 #### deep-security-agent::deploy-dsa
 <table>
   <tr>
@@ -77,8 +74,8 @@ e.g.
   </tr>
 </table>
 
-Usage
------
+## Usage
+
 #### deep-security-agent::default
 TODO: Write usage instructions for each cookbook.
 
@@ -94,18 +91,13 @@ Just include `deep-security-agent` in your node's `run_list`:
 }
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
+## Contributing
 
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+We're always open to PRs from the community. To submit one:
 
-License and Authors
--------------------
-Authors: TODO: List authors
+1. Fork the repo
+1. Create a new feature branch
+1. Make your changes
+1. Submit a PR with an explanation of what/why/cavaets/etc.
+
+We'll review and work with you to make sure that the fix gets pushed out quickly.

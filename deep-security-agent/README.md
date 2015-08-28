@@ -2,7 +2,7 @@ A collection of recipes to help deploy and manage the Deep Security agent.
 
 ## Requirements
 
-All of the recipes in this cookbook require a working Deep Security infrastructure. The key component is the Deep Security manager. The agents (which these recipes help you manager) do the heavy lifting but the manager gives the marching orders. 
+All of the recipes in this cookbook require a working Deep Security infrastructure. The key component is the Deep Security manager. The agents (which these recipes help you manage) do the heavy lifting but the manager gives the marching orders. 
 
 There are no specific technical requirements beyond a standard Chef deployment.
 

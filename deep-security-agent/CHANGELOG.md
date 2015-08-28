@@ -2,9 +2,7 @@
 *Created automatically for commit 5eec53044d45836c5295f03dc863159204508ade*
 
 b70f02f (5 minutes ago): Updated CHANGELOG with git commit history
-
 ed44ec4 (9 minutes ago): Updated the ## Usage instructions in the README
-
 a775a23 (10 minutes ago): Updated the README for clarity
 
 60f0918 (11 minutes ago): Updated attribute listing in the README

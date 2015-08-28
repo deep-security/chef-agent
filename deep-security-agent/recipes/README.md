@@ -2,7 +2,7 @@
 
 <dl>
 	<dt><a href="default.rb">default.rb</a></dt>
-	<dd>Deploys the Deep Security agent to the node</dd>
+	<dd>Deploys the Deep Security agent to the node<sup>1</sup></dd>
 
 	<dt><a href="dsa-check-in-with-manager.rb">dsa-check-in-with-manager.rb</a></dt>
 	<dd>Asks the Deep Security agent to check in with the Deep Security manager (forced heartbeat</a></dd>
@@ -23,4 +23,4 @@
 	<dd>Scans the node for malware</dd>
 </dl>
 
-Only the <a href="default.rb">default.rb</a> recipe requires any data to be passed. These requirements are outlined in the <a href="Attributes">/deep-security-agent/README.md#attributes</a> section of the main README. All other recipes run without any adtitional attributes.
+<sup>1</sup>Only the <a href="default.rb">default.rb</a> recipe requires any data to be passed. These requirements are outlined in the <a href="Attributes">/deep-security-agent/README.md#attributes</a> section of the main README. All other recipes run without any adtitional attributes.

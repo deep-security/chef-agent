@@ -8,4 +8,4 @@
 - [dsa-scan-for-integrity-changes.rb](dsa-scan-for-integrity-changes.rb) : Scans the node for changes to the filesystem and memory based on the rules running in the integrity monitoring engine
 - [dsa-scan-for-malware.rb](dsa-scan-for-malware.rb) : Scans the node for malware
 
-Only the [default.rb](default.rb) recipe requires any data to be passed. These requirements are outlined in the [Attributes](/README.md#attributes) section of the main README. All other recipes run without any additional attributes.
+Only the [default.rb](default.rb) recipe requires any data to be passed. These requirements are outlined in the [Attributes](/deep-security-agent/README.md#attributes) section of the main README. All other recipes run without any additional attributes.

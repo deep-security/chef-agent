@@ -1,3 +1,5 @@
+# CHANGELOG
+
 b70f02f (5 minutes ago): Updated CHANGELOG with git commit history
 
 ed44ec4 (9 minutes ago): Updated the ## Usage instructions in the README

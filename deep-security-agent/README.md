@@ -6,6 +6,7 @@ All of the recipes in this cookbook require a working Deep Security infrastructu
 
 There are no specific technical requirements beyond a standard Chef deployment.
 
+<a name="attributes"></a>
 ## Attributes
 
 #### deep-security-agent::deploy-dsa

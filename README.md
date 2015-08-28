@@ -23,7 +23,12 @@ The recipes within this repo are now available to you from within your AWS OpsWo
 
 ### Multiple custom cookbooks
 
+**This technique is still being tested**
+
 Since AWS OpsWorks only allows one custom cookbook per stack. You have to do a little extra work if you want to incorporate multiple custom cookbooks. Thankfully, git makes this easy. 
 
 1. Create a new repo that you will use as your custom cookbook
 1. Add each cookbook you want to use as a [```git submodule```](http://git-scm.com/docs/git-submodule)
+1. Create a symbolic link to the recipe at the top level of the new repo (```ln -s clone/recipe recipe```)
+
+This will keep each of the customer cookbook

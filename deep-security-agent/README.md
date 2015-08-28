@@ -75,10 +75,8 @@ There are no specific technical requirements beyond a standard Chef deployment.
 ## Usage
 
 #### deep-security-agent::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `deep-security-agent` in your node's `run_list`:
+Make sure that you include 'deep-security-agent' in your node's 'run_list'. This will ensure that the Deep Security agent is installed (it's the default.rb recipe).
 
 ```json
 {

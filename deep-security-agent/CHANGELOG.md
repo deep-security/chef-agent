@@ -1,13 +1,14 @@
 # CHANGELOG
-*Created automatically for commit c8fe87b08894151b70c800972e55de6f63c4c026*
+*Created automatically for commit ad65e7251c49cf85c546e2940a9790e7aab28881*
 
-c8fe87bt(0 seconds ago): Updated the format in the recipes README
+ad65e72t(0 seconds ago): Updated the format in the recipes README
+c8fe87bt(34 seconds ago): Updated the format in the recipes README
 66de374t(2 minutes ago): Updated the format in the recipes README
-44d9cdct(36 minutes ago): Updated the recipes README
-5184508t(37 minutes ago): Added a README for the recipes folder
-a05936ct(43 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+44d9cdct(37 minutes ago): Updated the recipes README
+5184508t(38 minutes ago): Added a README for the recipes folder
+a05936ct(44 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
 9e33d21t(44 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
-b146b52t(44 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+b146b52t(45 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
 5c68b21t(49 minutes ago): Updated main README to highlight AWS OpsWorks usage
 9ff14bdt(3 hours ago): Updated main README to highlight AWS OpsWorks usage
 0753dd8t(11 hours ago): Updated CHANGELOG with a note about the latest commit ID

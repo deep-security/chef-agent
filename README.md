@@ -31,4 +31,4 @@ Since AWS OpsWorks only allows one custom cookbook per stack. You have to do a l
 1. Add each cookbook you want to use as a [```git submodule```](http://git-scm.com/docs/git-submodule)
 1. Create a symbolic link to the recipe at the top level of the new repo (```ln -s clone/recipe recipe```)
 
-This will keep each of the customer cookbook
+This will keep each of the customer cookbook in it's own git repo but allow you to point OpsWorks to one place.

@@ -1,16 +1,16 @@
 #
 # Cookbook Name:: deep-security-agent
-# Recipe:: Check-in with the Deep Security manager
+# Recipe:: Build an integrity baseline for the node
 #
 # Copyright 2015, Trend Micro
 #
 # License as per [repo](master/LICENSE)
 #
 # *********************************************************************
-# * Ask the Deep Security agent to check-in
+# * Create an integrity baseline for the current node
 # *********************************************************************
 
-dsa_args = "-m" # force a heartbeat with the manager
+dsa_args = "--buildBaseline" # create an integrity baseline and send it to the manager
 
 if node[:platform_family] =~ /win/
 	powershell_script 'prompt_ds_agent' do

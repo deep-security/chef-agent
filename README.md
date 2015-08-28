@@ -20,3 +20,10 @@ To enable a custom cookbook:
 1. Click the blue, "Update Custom Cookbooks" button to run the command
 
 The recipes within this repo are now available to you from within your AWS OpsWorks stack.
+
+### Multiple custom cookbooks
+
+Since AWS OpsWorks only allows one custom cookbook per stack. You have to do a little extra work if you want to incorporate multiple custom cookbooks. Thankfully, git makes this easy. 
+
+1. Create a new repo that you will use as your custom cookbook
+1. Add each cookbook you want to use as a [```git submodule```](http://git-scm.com/docs/git-submodule)

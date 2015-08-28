@@ -23,7 +23,7 @@ The recipes within this repo are now available to you from within your AWS OpsWo
 
 ### Multiple custom cookbooks
 
-****This technique is still being tested****
+**--This technique is still being tested--**
 
 Since AWS OpsWorks only allows one custom cookbook per stack. You have to do a little extra work if you want to incorporate multiple custom cookbooks. Thankfully, git makes this easy. 
 

@@ -1,15 +1,16 @@
 # CHANGELOG
-*Created automatically for commit ad65e7251c49cf85c546e2940a9790e7aab28881*
+*Created automatically for commit 73bbe7d5bbe5b82c90a97ed8ecf6dc0067541c3a*
 
-ad65e72t(0 seconds ago): Updated the format in the recipes README
-c8fe87bt(34 seconds ago): Updated the format in the recipes README
-66de374t(2 minutes ago): Updated the format in the recipes README
-44d9cdct(37 minutes ago): Updated the recipes README
-5184508t(38 minutes ago): Added a README for the recipes folder
-a05936ct(44 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
-9e33d21t(44 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
-b146b52t(45 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
-5c68b21t(49 minutes ago): Updated main README to highlight AWS OpsWorks usage
+73bbe7dt(0 seconds ago): Updated README
+ad65e72t(50 seconds ago): Updated the format in the recipes README
+c8fe87bt(84 seconds ago): Updated the format in the recipes README
+66de374t(3 minutes ago): Updated the format in the recipes README
+44d9cdct(38 minutes ago): Updated the recipes README
+5184508t(39 minutes ago): Added a README for the recipes folder
+a05936ct(45 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+9e33d21t(45 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+b146b52t(46 minutes ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+5c68b21t(50 minutes ago): Updated main README to highlight AWS OpsWorks usage
 9ff14bdt(3 hours ago): Updated main README to highlight AWS OpsWorks usage
 0753dd8t(11 hours ago): Updated CHANGELOG with a note about the latest commit ID
 0a2acaet(11 hours ago): Updated CHANGELOG with a note about the latest commit ID
@@ -28,6 +29,6 @@ fea5c69t(20 hours ago): Updated README
 baaf4dat(20 hours ago): Updated README
 8e8c5c8t(20 hours ago): Update README with the required attributes for the deploy-dsa.rb recipe
 eda4a3et(20 hours ago): Removed port from dsm_agent_download_hostname, it's in it's own attribute now
-960935bt(20 hours ago): Added initial test recipe for deploying the Deep Security agent
+960935bt(21 hours ago): Added initial test recipe for deploying the Deep Security agent
 11118e7t(2 days ago): Added a default cookbook
 cd07e1bt(2 days ago): Updated README

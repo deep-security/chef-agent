@@ -23,4 +23,4 @@
 	<dd>Scans the node for malware</dd>
 </dl>
 
-<sup>1</sup>Only the <a href="default.rb">default.rb</a> recipe requires any data to be passed. These requirements are outlined in the <a href="Attributes">/deep-security-agent/README.md#attributes</a> section of the main README. All other recipes run without any adtitional attributes.
+<sup>1</sup>Only the <a href="default.rb">default.rb</a> recipe requires any data to be passed. These requirements are outlined in the <a href="Attributes">/deep-security-agent/README.md#attributes</a> section of the main README. All other recipes run without any additional attributes.

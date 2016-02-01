@@ -1,18 +1,19 @@
 # CHANGELOG
-*Created automatically for commit 0e18f8a5401cff0b57d8d07e7c4a9513cdae1c3e*
+*Created automatically for commit 4acac86d8dc3f2bd58ca66751c857c2ca84962a0*
 
-0e18f8at(0 seconds ago): Updated documentation for recipe
-73bbe7dt(29 hours ago): Updated README
-ad65e72t(29 hours ago): Updated the format in the recipes README
-c8fe87bt(29 hours ago): Updated the format in the recipes README
-66de374t(29 hours ago): Updated the format in the recipes README
-44d9cdct(30 hours ago): Updated the recipes README
-5184508t(30 hours ago): Added a README for the recipes folder
-a05936ct(30 hours ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
-9e33d21t(30 hours ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
-b146b52t(30 hours ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
-5c68b21t(30 hours ago): Updated main README to highlight AWS OpsWorks usage
-9ff14bdt(32 hours ago): Updated main README to highlight AWS OpsWorks usage
+4acac86t(0 seconds ago): Updated README
+0e18f8at(8 hours ago): Updated documentation for recipe
+73bbe7dt(2 days ago): Updated README
+ad65e72t(2 days ago): Updated the format in the recipes README
+c8fe87bt(2 days ago): Updated the format in the recipes README
+66de374t(2 days ago): Updated the format in the recipes README
+44d9cdct(2 days ago): Updated the recipes README
+5184508t(2 days ago): Added a README for the recipes folder
+a05936ct(2 days ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+9e33d21t(2 days ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+b146b52t(2 days ago): Added instructions on how to merge multiple cookbooks for OpsWorks usage
+5c68b21t(2 days ago): Updated main README to highlight AWS OpsWorks usage
+9ff14bdt(2 days ago): Updated main README to highlight AWS OpsWorks usage
 0753dd8t(2 days ago): Updated CHANGELOG with a note about the latest commit ID
 0a2acaet(2 days ago): Updated CHANGELOG with a note about the latest commit ID
 5eec530t(2 days ago): Added a title to the CHANGELOG

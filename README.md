@@ -16,8 +16,28 @@ To enable a custom cookbook:
 	- "Repository URL": *https://github.com/deep-security/chef.git*
 1. Click the blue "Save" button
 1. On the "Deployments" page for your stack, click the gray "Run Command" button
+
+If you have existing instances running, do the following;
+
 1. Select "Update Custom Cookbooks" from the "Command" drop-down
 1. Click the blue, "Update Custom Cookbooks" button to run the command
+
+In the Layers section of the OpsWorks Management Console, for your layer;
+
+1. Click Recipes
+1. Under "Custom Recipes", in the "*Configuration*" life cycle enter **deep-security-agent::default**
+1. Click the General Settings section
+1. In the "Custom JSON" section, enter the necessary recipe settings
+
+The recipe settings will be along the lines of;
+
+```javascript
+{
+  "tenant_id": "11111111-2222-3333-4444-555555555555",
+  "policy_name": "Policy Name",
+  "tenant_password": "11111111-2222-3333-4444-555555555555"
+}
+```
 
 The recipes within this repo are now available to you from within your AWS OpsWorks stack.
 

@@ -194,14 +194,22 @@ else
 	  action :install
 	end
 end
+Chef::Log.info "ds_agent package installed successfully"
+
+
+# Wait for the metadata to load
+sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
 
 # Make sure the service is running
+Chef::Log.info "Making sure that the ds_agent service has started"
 service "ds_agent" do
     action :start
 end
 
+Chef::Log.info "ds_agent service is up and running, pausing to ensure all the local metadata has been collected"
 # Wait for the metadata to load
 sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
+Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready to activate"
 
 # Activate the agent
 dsa_args = "-a dsm://#{dsm_agent_activation_hostname}:#{dsm_agent_activation_port}/"

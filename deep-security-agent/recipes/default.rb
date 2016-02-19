@@ -201,7 +201,7 @@ service "ds_agent" do
 end
 
 # Wait for the metadata to load
-sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
+sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
 
 # Activate the agent
 dsa_args = "-a dsm://#{dsm_agent_activation_hostname}:#{dsm_agent_activation_port}/"

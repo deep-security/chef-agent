@@ -1,7 +1,8 @@
 # CHANGELOG
-*Created automatically for commit 1b092bb06b21f1e4e9298f761c1e09b1ced3644d*
+*Created automatically for commit b2e3ba8d9e27cb661a8fdf8cd29d45517baf0642*
 
-1b092bbt(0 seconds ago): Adjusted sleep time to 15s to match current recommendations in 'deployment scripts' in Deep Security
+b2e3ba8t(0 seconds ago): Added extra logging to provide better information in the Chef logs
+1b092bbt(33 minutes ago): Adjusted sleep time to 15s to match current recommendations in 'deployment scripts' in Deep Security
 ce43935t(3 weeks ago): Updated README to reflect new OpsWorks structure
 4acac86t(6 months ago): Updated README
 0e18f8at(6 months ago): Updated documentation for recipe

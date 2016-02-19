@@ -188,6 +188,11 @@ if agent_download_key =~ /ubuntu/
 	  source local_file_path
 	  action :install
 	end
+elsif agent_download_key =~ /suse/
+	rpm_package "ds_agent" do
+	  source local_file_path
+	  action :install
+	end
 else
 	package "ds_agent" do
 	  source local_file_path
@@ -202,8 +207,12 @@ sleep(5) # this allows the agent to query the AWS metadata URL to gather the env
 
 # Make sure the service is running
 Chef::Log.info "Making sure that the ds_agent service has started"
-service "ds_agent" do
+begin
+	service "ds_agent" do
     action :start
+	end
+rescue
+	Chef::Log.warning "Could not start the service using the native Chef method"
 end
 
 Chef::Log.info "ds_agent service is up and running, pausing to ensure all the local metadata has been collected"

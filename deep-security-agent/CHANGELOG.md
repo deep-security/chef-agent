@@ -1,9 +1,10 @@
 # CHANGELOG
-*Created automatically for commit 82d8e8638c275cc9531b56c73593737735ce693d*
+*Created automatically for commit 707271441fd22290a43909284528257970c27e79*
 
-82d8e86t(0 seconds ago): Adjusted package method for SUSE clients
-b2e3ba8t(6 hours ago): Added extra logging to provide better information in the Chef logs
-1b092bbt(7 hours ago): Adjusted sleep time to 15s to match current recommendations in 'deployment scripts' in Deep Security
+7072714t(0 seconds ago): Added a block to ensure that the sleep() delay is executed in sequence on all OSes
+82d8e86t(3 days ago): Adjusted package method for SUSE clients
+b2e3ba8t(3 days ago): Added extra logging to provide better information in the Chef logs
+1b092bbt(3 days ago): Adjusted sleep time to 15s to match current recommendations in 'deployment scripts' in Deep Security
 ce43935t(3 weeks ago): Updated README to reflect new OpsWorks structure
 4acac86t(6 months ago): Updated README
 0e18f8at(6 months ago): Updated documentation for recipe

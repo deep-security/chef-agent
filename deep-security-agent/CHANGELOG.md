@@ -1,11 +1,12 @@
 # CHANGELOG
-*Created automatically for commit 707271441fd22290a43909284528257970c27e79*
+*Created automatically for commit e7925c0d8c3bebe539ef77e182ca17d615d81686*
 
-7072714t(0 seconds ago): Added a block to ensure that the sleep() delay is executed in sequence on all OSes
-82d8e86t(3 days ago): Adjusted package method for SUSE clients
-b2e3ba8t(3 days ago): Added extra logging to provide better information in the Chef logs
-1b092bbt(3 days ago): Adjusted sleep time to 15s to match current recommendations in 'deployment scripts' in Deep Security
-ce43935t(3 weeks ago): Updated README to reflect new OpsWorks structure
+e7925c0t(0 seconds ago): Fixed link issue in README
+7072714t(2 weeks ago): Added a block to ensure that the sleep() delay is executed in sequence on all OSes
+82d8e86t(3 weeks ago): Adjusted package method for SUSE clients
+b2e3ba8t(3 weeks ago): Added extra logging to provide better information in the Chef logs
+1b092bbt(3 weeks ago): Adjusted sleep time to 15s to match current recommendations in 'deployment scripts' in Deep Security
+ce43935t(5 weeks ago): Updated README to reflect new OpsWorks structure
 4acac86t(6 months ago): Updated README
 0e18f8at(6 months ago): Updated documentation for recipe
 73bbe7dt(6 months ago): Updated README
@@ -37,5 +38,5 @@ baaf4dat(6 months ago): Updated README
 8e8c5c8t(6 months ago): Update README with the required attributes for the deploy-dsa.rb recipe
 eda4a3et(6 months ago): Removed port from dsm_agent_download_hostname, it's in it's own attribute now
 960935bt(6 months ago): Added initial test recipe for deploying the Deep Security agent
-11118e7t(6 months ago): Added a default cookbook
-cd07e1bt(6 months ago): Updated README
+11118e7t(7 months ago): Added a default cookbook
+cd07e1bt(7 months ago): Updated README

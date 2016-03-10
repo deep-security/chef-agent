@@ -245,6 +245,9 @@ if agent_download_key =~ /win/
 	end
 else
 	execute "activate_ds_agent" do
+		command "/opt/ds_agent/dsa_control -r"
+	end	
+	execute "activate_ds_agent" do
 		command "/opt/ds_agent/dsa_control #{dsa_args}"
 	end	
 end

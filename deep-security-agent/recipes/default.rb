@@ -139,12 +139,7 @@ ruby_block 'activate_ds_agent' do
 
     Chef::Log.info 'ds_agent service is up and running, pausing to ensure all the local metadata has been collected'
 
-    # Block the wait to ensure it's sequential
-    ruby_block 'metadata_wait' do
-      block do
-        sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
-      end
-    end
+    sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
     Chef::Log.info 'ds_agent package installed. ds_agent service is running. Ready to activate'
 
     # Activate the agent

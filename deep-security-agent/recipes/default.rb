@@ -103,7 +103,7 @@ Chef::Log.info "Selected #{agent_download_key}/#{bitness} as the agent download 
 tmp_path = ''
 if ENV.has_key?('TMPDIR')
   tmp_path = ENV['TMPDIR']
-elsif tmp_path = ENV['TMP']
+elsif tmp_path == ENV['TMP']
   tmp_path = ENV['TMP']
 elsif tmp_path == ENV['TEMP']
   tmp_path = ENV['TEMP']

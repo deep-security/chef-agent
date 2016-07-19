@@ -105,7 +105,7 @@ if ENV.has_key?('TMPDIR')
   tmp_path = ENV['TMPDIR']
 elsif tmp_path = ENV['TMP']
   tmp_path = ENV['TMP']
-elsif tmp_path = ENV['TEMP']
+elsif tmp_path == ENV['TEMP']
   tmp_path = ENV['TEMP']
 else
   tmp_path = Dir.tmpdir
@@ -120,6 +120,67 @@ agent_download_url = "#{agent_download_info[agent_download_key][bitness]}"
 
 Chef::Log.info "Local file: #{local_file_path}"
 Chef::Log.info "URL: #{agent_download_url}"
+
+# Activate the agent
+ruby_block 'activate_ds_agent' do
+  block do
+    # Wait for the metadata to load
+    sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
+
+    # Make sure the service is running
+    Chef::Log.info 'Making sure that the ds_agent service has started'
+    begin
+      service 'ds_agent' do
+        action :start
+      end
+    rescue
+      Chef::Log.warning 'Could not start the service using the native Chef method'
+    end
+
+    Chef::Log.info 'ds_agent service is up and running, pausing to ensure all the local metadata has been collected'
+
+    # Block the wait to ensure it's sequential
+    ruby_block 'metadata_wait' do
+      block do
+        sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
+      end
+    end
+    Chef::Log.info 'ds_agent package installed. ds_agent service is running. Ready to activate'
+
+    # Activate the agent
+    dsa_args = "-a dsm://#{node['dsm_agent']['activation_hostname']}:#{node['dsm_agent']['activation_port']}/"
+    if node['dsm_agent']['tenant_id'] && node['dsm_agent']['tenant_password']
+      dsa_args << " \"tenantID:#{node['dsm_agent']['tenant_id']}\" \"tenantPassword:#{node['dsm_agent']['tenant_password']}\""
+    end
+    if node['dsm_agent']['policy_id']
+      dsa_args << " \"policyid:#{node['dsm_agent']['policy_id']}\""
+    elsif node['dsm_agent']['policy_name']
+      dsa_args << " \"policy:#{node['dsm_agent']['policy_name']}\""
+    end
+    Chef::Log.info "Running dsa_control with args: #{dsa_args}"
+
+    if agent_download_key =~ /win/
+      powershell_script 'activate_ds_agent' do
+        code <<-EOH
+        & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" -r
+        & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" #{dsa_args}
+        EOH
+      end
+    else
+      execute 'activate_ds_agent' do
+        command '/opt/ds_agent/dsa_control -r'
+      end
+      execute 'activate_ds_agent' do
+        command "/opt/ds_agent/dsa_control #{dsa_args}"
+      end
+    end
+    Chef::Log.info('Activated the Deep Security agent')
+  end
+  action :nothing
+  subscribes :install, "dpkg_package['ds_agent']", :immediately
+  subscribes :install, "rpm_package['ds_agent']", :immediately
+  subscribes :install, "package['ds_agent']", :immediately
+end
 
 # Download the agent
 if node['dsm_agent']['ignore_ssl_validation']
@@ -152,56 +213,3 @@ else
   end
 end
 Chef::Log.info 'ds_agent package installed successfully'
-
-
-# Wait for the metadata to load
-sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
-
-# Make sure the service is running
-Chef::Log.info 'Making sure that the ds_agent service has started'
-begin
-  service 'ds_agent' do
-    action :start
-  end
-rescue
-  Chef::Log.warning 'Could not start the service using the native Chef method'
-end
-
-Chef::Log.info 'ds_agent service is up and running, pausing to ensure all the local metadata has been collected'
-
-# Block the wait to ensure it's sequential
-ruby_block 'metadata_wait' do
-  block do
-    sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
-  end
-end
-Chef::Log.info 'ds_agent package installed. ds_agent service is running. Ready to activate'
-
-# Activate the agent
-dsa_args = "-a dsm://#{node['dsm_agent']['activation_hostname']}:#{node['dsm_agent']['activation_port']}/"
-if node['dsm_agent']['tenant_id'] && node['dsm_agent']['tenant_password']
-  dsa_args << " \"tenantID:#{node['dsm_agent']['tenant_id']}\" \"tenantPassword:#{node['dsm_agent']['tenant_password']}\""
-end
-if node['dsm_agent']['policy_id']
-  dsa_args << " \"policyid:#{node['dsm_agent']['policy_id']}\""
-elsif node['dsm_agent']['policy_name']
-  dsa_args << " \"policy:#{node['dsm_agent']['policy_name']}\""
-end
-Chef::Log.info "Running dsa_control with args: #{dsa_args}"
-
-if agent_download_key =~ /win/
-  powershell_script 'activate_ds_agent' do
-    code <<-EOH
-    & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" -r
-    & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" #{dsa_args}
-    EOH
-  end
-else
-  execute 'activate_ds_agent' do
-    command '/opt/ds_agent/dsa_control -r'
-  end
-  execute 'activate_ds_agent' do
-    command "/opt/ds_agent/dsa_control #{dsa_args}"
-  end
-end
-Chef::Log.info('Activated the Deep Security agent')

@@ -134,7 +134,7 @@ ruby_block 'activate_ds_agent' do
         action :start
       end
     rescue
-      Chef::Log.warning 'Could not start the service using the native Chef method'
+      Chef::Log.info 'Could not start the service using the native Chef method'
     end
 
     Chef::Log.info 'ds_agent service is up and running, pausing to ensure all the local metadata has been collected'
@@ -177,9 +177,9 @@ ruby_block 'activate_ds_agent' do
     Chef::Log.info('Activated the Deep Security agent')
   end
   action :nothing
-  subscribes :install, "dpkg_package['ds_agent']", :immediately
-  subscribes :install, "rpm_package['ds_agent']", :immediately
-  subscribes :install, "package['ds_agent']", :immediately
+  subscribes :run, 'dpkg_package[ds_agent]', :delayed
+  subscribes :run, 'rpm_package[ds_agent]', :delayed
+  subscribes :run, 'package[ds_agent]', :delayed
 end
 
 # Download the agent

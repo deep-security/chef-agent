@@ -4,9 +4,9 @@ maintainer_email 'aws@trendmicro.com'
 license          'All rights reserved'
 description      'Installs/Configures the Deep Security agent'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.2.0'
+version          '0.3.0'
 
 supports 'ubuntu'
 supports 'redhat'
 supports 'suse'
-supports 'windows', '>= 6.1'
+supports 'windows'

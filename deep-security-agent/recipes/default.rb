@@ -178,7 +178,7 @@ if ignore_ssl_validation
 else
 	remote_file local_file_path do
 	    source agent_download_url
-	    action :create
+	    action :create_if_missing
 	end
 end
 

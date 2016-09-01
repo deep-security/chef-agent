@@ -12,9 +12,6 @@
 
 # Ruby standard lib requirements
 require 'tmpdir'
-require 'chef/mixin/shell_out'
-
-include Chef::Mixin::ShellOut
 
 # Expected attributes:
 # {
@@ -207,9 +204,10 @@ Chef::Log.info "ds_agent package installed successfully"
 
 def configured?
   @configured ||= begin
-    cmd = shell_out("/opt/ds_agent/dsa_control -m", {:returns => [0]})
-    cmd.stderr.empty? && (cmd.stdout =~ /HTTP\sStatus\:\s200/im)
-  end
+	  so = Mixlib::ShellOut.new("/opt/ds_agent/dsa_control -m")
+	  so.run_command
+	  so.stdout =~ /HTTP\sStatus\:\s200/im
+	end
 end
 
 if configured?

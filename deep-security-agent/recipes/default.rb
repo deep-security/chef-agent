@@ -212,7 +212,7 @@ end
 
 if configured?
 
-	Chef::Log.info "Skipping configuration because it is already configured"
+	Chef::Log.warning "Skipping configuration because it is already configured"
 
 else
 

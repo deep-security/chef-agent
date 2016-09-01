@@ -210,7 +210,7 @@ end
 
 if @configured
 
-	Chef::Log.info "Skipping configuration because it is already configured"
+	Chef::Log.warn "Skipping configuration because it is already configured"
 
 else
 
@@ -224,7 +224,7 @@ else
 	    action :start
 		end
 	rescue
-		Chef::Log.warning "Could not start the service using the native Chef method"
+		Chef::Log.warn "Could not start the service using the native Chef method"
 	end
 
 	Chef::Log.info "ds_agent service is up and running, pausing to ensure all the local metadata has been collected"

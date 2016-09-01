@@ -12,6 +12,7 @@
 
 # Ruby standard lib requirements
 require 'tmpdir'
+require 'chef/mixin/shell_out'
 
 # Expected attributes:
 # {

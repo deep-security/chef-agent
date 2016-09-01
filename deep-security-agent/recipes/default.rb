@@ -265,3 +265,5 @@ else
 		end	
 	end
 	Chef::Log.info("Activated the Deep Security agent")
+
+end

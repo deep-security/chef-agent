@@ -14,6 +14,8 @@
 require 'tmpdir'
 require 'chef/mixin/shell_out'
 
+include Chef::Mixin::ShellOut
+
 # Expected attributes:
 # {
 #    "dsm_agent_download_hostname": "app.deepsecurity.trendmicro.com",

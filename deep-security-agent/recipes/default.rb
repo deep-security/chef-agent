@@ -202,15 +202,18 @@ end
 Chef::Log.info "ds_agent package installed successfully"
 
 
-@configured ||= begin
+configured = begin
   so = Mixlib::ShellOut.new("/opt/ds_agent/dsa_control -m")
   so.run_command
+
+  Chef::Log.info "ds_agent package #{so.stdout}"
+
   so.stdout =~ /HTTP\sStatus\:\s200/im
 rescue
 	false
 end
 
-if @configured
+if configured
 
 	Chef::Log.warn "Skipping configuration because it is already configured"
 

@@ -1,0 +1,29 @@
+{
+  "name": "deep-security-agent",
+  "description": "Installs/Configures the Deep Security agent",
+  "long_description": "",
+  "maintainer": "Trend Micro",
+  "maintainer_email": "aws@trendmicro.com",
+  "license": "All rights reserved",
+  "platforms": {
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.1"
+}

@@ -10,3 +10,6 @@ bin/*
 
 # Mac
 .DS_Store
+
+#rubymine
+.idea

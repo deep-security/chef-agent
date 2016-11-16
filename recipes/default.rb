@@ -167,10 +167,6 @@ end
 Chef::Log.info "ds_agent package installed successfully"
 
 
-# Wait for the metadata to load
-sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
-
-
 # Make sure the service is running
 Chef::Log.info "Making sure that the ds_agent service has started"
 begin

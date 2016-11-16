@@ -76,12 +76,16 @@ local_file_path = "#{Chef::Config['file_cache_path']}/#{local_file_name}"
 
 
 # Download the agent
+Chef::Log.info "downloading #{url} to #{local_file_path} as the based on Ohai reporting: #{node[:platform_family]}, #{node[:platform_version]}, #{node[:kernel][:release]}}"
 if agent[:download_ignore_ssl]
-  open(local_file_path, 'wb') do |file|
-    file << open(URI.parse(url), {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
+  ruby_block 'download_'+local_file_path do
+    block do
+      open(local_file_path, 'wb') do |file|
+        file << open(URI.parse(url), {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
+      end
+    end
   end
 else
-  Chef::Log.info "downloading #{url} to #{local_file_path} as the based on Ohai reporting: #{node[:platform_family]}, #{node[:platform_version]}, #{node[:kernel][:release]}}"
 	remote_file local_file_path do
 	    source url
 	    action :create

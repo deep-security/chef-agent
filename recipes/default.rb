@@ -190,21 +190,8 @@ if agent[:policy_id]
 elsif agent[:policy_name]
 	dsa_args << " \"policy:#{agent[:policy_name]}\""
 end
-Chef::Log.info "Running dsa_control with args: #{dsa_args}"
 
-if agent_download_key =~ /win/
-	powershell_script 'activate_ds_agent' do
-	  code <<-EOH
-	  & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" -r
-		& $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" #{dsa_args}
-	  EOH
-	end
-else
-	execute "activate_ds_agent" do
-		command "/opt/ds_agent/dsa_control -r"
-	end	
-	execute "activate_ds_agent" do
-		command "/opt/ds_agent/dsa_control #{dsa_args}"
-	end	
-end
+dsa_control('-r',     'activate-r')
+dsa_control(dsa_args, 'activate')
+
 Chef::Log.info("Activated the Deep Security agent")

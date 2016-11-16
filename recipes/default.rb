@@ -26,7 +26,7 @@ end
 
 #construct URL
 # @TODO need to differentiate between Ubuntu and Debian proper
-url = "https://#{agent[:download_hostname]}:443/software/agent"
+url = "https://#{agent[:download_hostname]}:#{agent[:download_port]}/software/agent"
 
 platform_major_version = node[:platform_version].split('.').first
 case node[:platform_family]
@@ -55,7 +55,7 @@ case node[:platform_family]
 		raise 'Unsupported platform family ' + node[:platform_family]
 end
 
-url << "#{bitness == 64 ? '/x86_64/' : '/i386/'}Z"
+url << "#{bitness == 64 ? '/x86_64/' : '/i386/'}"
 
 
 

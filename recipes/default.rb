@@ -72,24 +72,7 @@ case node[:platform_family]
 		raise 'Unsupported platform family ' + node[:platform_family]
 end
 
-#figure out local path setup
-tmp_path = ''
-if ENV.has_key?('TMPDIR')
-  tmp_path = ENV['TMPDIR']
-elsif tmp_path = ENV['TMP']
-  tmp_path = ENV['TMP']
-elsif tmp_path = ENV['TEMP']
-  tmp_path = ENV['TEMP']
-else
-  tmp_path = Dir.tmpdir()
-end
-
-
-Chef::Log.info "Tmp folder determined to be [#{tmp_path}]"
-local_file_path = "#{tmp_path}/#{local_file_name}"
-if node[:platform_family] == 'windows'
-  local_file_path = "#{tmp_path}\\#{local_file_name}"
-end
+local_file_path = "#{Chef::Config['file_cache_path']}/#{local_file_name}"
 
 
 

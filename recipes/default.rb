@@ -13,8 +13,9 @@
 # Ruby standard lib requirements
 require 'tmpdir'
 
-
+#get attributes in handy variable
 agent = node['deep-security-agent']
+
 
 # Matrix of agents to downloaded based on OS
 agent_download_info = {
@@ -75,6 +76,7 @@ agent_download_info = {
 		},	
 	}
 
+
 # Determine the correct agent based on information reported by Ohai
 agent_download_key = "amzn"
 case node[:platform_family]
@@ -96,6 +98,7 @@ else
 	agent_download_key = "rhel_6"
 end
 
+
 # assume 64-bit but allow for 32-bit when detected
 bitness = 64
 if node['kernel']['machine'] =~ /32/
@@ -103,7 +106,13 @@ if node['kernel']['machine'] =~ /32/
 end
 Chef::Log.info "Selected #{agent_download_key}/#{bitness} as the agent download based on Ohai reporting: #{node[:platform_family]}, #{node[:platform_version]}, #{node[:kernel][:release]}}"
 
-# Get the URL and local path setup
+
+# Get the URL to download from
+agent_download_url = "#{agent_download_info[agent_download_key][bitness]}"
+Chef::Log.info "URL: #{agent_download_url}"
+
+
+#figure out local path setup
 tmp_path = ''
 if ENV.has_key?('TMPDIR')
 	tmp_path = ENV['TMPDIR']
@@ -114,16 +123,15 @@ elsif tmp_path = ENV['TEMP']
 else
 	tmp_path = Dir.tmpdir()
 end
+
 Chef::Log.info "Tmp folder determined to be [#{tmp_path}]"
 local_file_path = "#{tmp_path}/#{agent_download_info[agent_download_key]['fn']}"
 if agent_download_key =~ /win/
 	local_file_path = "#{tmp_path}\\#{agent_download_info[agent_download_key]['fn']}"
 end
 
-agent_download_url = "#{agent_download_info[agent_download_key][bitness]}"
-
 Chef::Log.info "Local file: #{local_file_path}"
-Chef::Log.info "URL: #{agent_download_url}"
+
 
 # Download the agent
 if agent[:ignore_ssl_validation]
@@ -137,6 +145,7 @@ else
 	    action :create
 	end
 end
+
 
 # Install the agent
 if agent_download_key =~ /ubuntu/
@@ -161,17 +170,19 @@ Chef::Log.info "ds_agent package installed successfully"
 # Wait for the metadata to load
 sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
 
+
 # Make sure the service is running
 Chef::Log.info "Making sure that the ds_agent service has started"
 begin
 	service "ds_agent" do
     action :start
-	end
+  end
+	Chef::Log.info "ds_agent service is up and running, pausing to ensure all the local metadata has been collected"
 rescue
 	Chef::Log.warning "Could not start the service using the native Chef method"
 end
 
-Chef::Log.info "ds_agent service is up and running, pausing to ensure all the local metadata has been collected"
+
 # Block the wait to ensure it's sequential
 ruby_block 'metadata_wait' do
 	block do
@@ -179,6 +190,7 @@ ruby_block 'metadata_wait' do
 	end
 end
 Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready to activate"
+
 
 # Activate the agent
 dsa_args = "-a dsm://#{agent[:dsm_agent_activation_hostname]}:#{agent[:dsm_agent_activation_port]}/"

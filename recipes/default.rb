@@ -24,10 +24,9 @@ if node['kernel']['machine'] =~ /32/
 end
 
 
-
 #construct URL
 # @TODO need to differentiate between Ubuntu and Debian proper
-url = "https://#{agent[:dsm_agent_download_hostname]}:443/software/agent"
+url = "https://#{agent[:download_hostname]}:443/software/agent"
 
 platform_major_version = node[:platform_version].split('.').first
 case node[:platform_family]
@@ -77,13 +76,12 @@ local_file_path = "#{Chef::Config['file_cache_path']}/#{local_file_name}"
 
 
 # Download the agent
-Chef::Log.info "downloading #{url} to #{local_file_path} as the based on Ohai reporting: #{node[:platform_family]}, #{node[:platform_version]}, #{node[:kernel][:release]}}"
-if agent[:ignore_ssl_validation]
-	open(local_file_path, 'wb') do |file|
-		request_uri=URI.parse(url)
-		file << open(request_uri, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
-	end
+if agent[:download_ignore_ssl]
+  open(local_file_path, 'wb') do |file|
+    file << open(URI.parse(url), {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
+  end
 else
+  Chef::Log.info "downloading #{url} to #{local_file_path} as the based on Ohai reporting: #{node[:platform_family]}, #{node[:platform_version]}, #{node[:kernel][:release]}}"
 	remote_file local_file_path do
 	    source url
 	    action :create
@@ -140,7 +138,7 @@ Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready t
 
 
 # Activate the agent
-dsa_args = "-a dsm://#{agent[:dsm_agent_activation_hostname]}:#{agent[:dsm_agent_activation_port]}/"
+dsa_args = "-a dsm://#{agent[:activation_hostname]}:#{agent[:activation_port]}/"
 if agent[:tenant_id] and agent[:tenant_password]
 	dsa_args << " \"tenantID:#{agent[:tenant_id]}\" \"tenantPassword:#{agent[:tenant_password]}\""
 end

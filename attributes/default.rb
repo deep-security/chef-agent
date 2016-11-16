@@ -5,11 +5,12 @@ default['chef-vault']['databag_fallback'] = false
 
 agent = default['deep-security-agent']
 
-agent[:dsm_agent_download_hostname]   = 'app.deepsecurity.trendmicro.com'
-agent[:dsm_agent_download_port]       = '443'
-agent[:ignore_ssl_validation]         = false
-agent[:dsm_agent_activation_hostname] = 'agents.deepsecurity.trendmicro.com'
-agent[:dsm_agent_activation_port]     = '443'
+agent[:download_hostname]   = 'app.deepsecurity.trendmicro.com'
+agent[:download_port]       = '443'
+agent[:download_ignore_ssl] = false
+
+agent[:activation_hostname] = 'agents.deepsecurity.trendmicro.com'
+agent[:activation_port]     = '443'
 
 agent[:tenant_id]       = nil
 agent[:tenant_password] = nil #should be in chef vault

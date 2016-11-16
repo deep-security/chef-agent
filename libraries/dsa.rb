@@ -9,12 +9,14 @@ module DSA_Helpers
 
     if node[:platform_family] =~ /win/
       powershell_script block_name do
+        timeout 600
         code <<-EOH
 		    & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" #{args}
         EOH
       end
     else
       execute block_name do
+        timeout 600
         command "/opt/ds_agent/dsa_control #{args}"
       end
     end

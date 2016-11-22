@@ -11,6 +11,7 @@ agent[:download_ignore_ssl] = false
 
 agent[:activation_hostname] = 'agents.deepsecurity.trendmicro.com'
 agent[:activation_port]     = '443'
+agent[:activation_sethost]  = nil #hostname to set upon activation
 
 agent[:tenant_id]       = nil
 agent[:tenant_password] = nil #should be in chef vault

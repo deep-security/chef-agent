@@ -143,9 +143,15 @@ Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready t
 
 # Activate the agent
 dsa_args = "-a dsm://#{agent[:activation_hostname]}:#{agent[:activation_port]}/"
+
 if agent[:tenant_id] and agent[:tenant_password]
 	dsa_args << " \"tenantID:#{agent[:tenant_id]}\" \"tenantPassword:#{agent[:tenant_password]}\""
 end
+
+if agent[:activation_sethost]
+  dsa_args << " hostname:#{agent[:activation_sethost] }"
+end
+
 if agent[:policy_id]
 	dsa_args << " \"policyid:#{agent[:policy_id]}\""
 elsif agent[:policy_name]

@@ -26,7 +26,7 @@ end
 
 #construct URL
 # @TODO need to differentiate between Ubuntu and Debian proper
-url = "https://#{agent[:download_hostname]}:#{agent[:download_port]}/software/agent"
+url = "https://#{agent[:download][:host]}:#{agent[:download][:port]}/software/agent"
 
 platform_major_version = node[:platform_version].split('.').first
 case node[:platform_family]
@@ -77,7 +77,7 @@ local_file_path = "#{Chef::Config['file_cache_path']}/#{local_file_name}"
 
 # Download the agent
 Chef::Log.info "downloading #{url} to #{local_file_path} as the based on Ohai reporting: #{node[:platform_family]}, #{node[:platform_version]}, #{node[:kernel][:release]}}"
-if agent[:download_ignore_ssl]
+if agent[:download][:ignore_ssl]
   ruby_block 'download_'+local_file_path do
     block do
       open(local_file_path, 'wb') do |file|
@@ -142,14 +142,14 @@ Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready t
 
 
 # Activate the agent
-dsa_args = "-a dsm://#{agent[:activation_hostname]}:#{agent[:activation_port]}/"
+dsa_args = "-a dsm://#{agent[:activation][:hostname]}:#{agent[:activation][:port]}/"
 
 if agent[:tenant_id] and agent[:tenant_password]
 	dsa_args << " \"tenantID:#{agent[:tenant_id]}\" \"tenantPassword:#{agent[:tenant_password]}\""
 end
 
-if agent[:activation_sethost]
-  dsa_args << " hostname:#{agent[:activation_sethost] }"
+if agent[:activation][:sethost]
+  dsa_args << " hostname:#{agent[:activation][:sethost] }"
 end
 
 if agent[:policy_id]

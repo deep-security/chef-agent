@@ -75,7 +75,7 @@ local_file_path = "#{Chef::Config['file_cache_path']}/#{local_file_name}"
 
 
 
-# Download the agent
+# Download the agent (always incase server serves ann updated version)
 Chef::Log.info "downloading #{url} to #{local_file_path} as the based on Ohai reporting: #{node[:platform_family]}, #{node[:platform_version]}, #{node[:kernel][:release]}}"
 if agent[:download][:ignore_ssl]
   ruby_block 'download_'+local_file_path do
@@ -141,24 +141,39 @@ Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready t
 
 
 
-# Activate the agent
-dsa_args = "-a dsm://#{agent[:activation][:hostname]}:#{agent[:activation][:port]}/"
 
-if agent[:tenant_id] and agent[:tenant_password]
-	dsa_args << " \"tenantID:#{agent[:tenant_id]}\" \"tenantPassword:#{agent[:tenant_password]}\""
+
+# Activate the agent (unless the 'activated' file has been created)
+activated_file_path = '/opt/ds_agent/activated'
+unless ::File.exist?(activated_file_path)
+  dsa_args = "-a dsm://#{agent[:activation][:hostname]}:#{agent[:activation][:port]}/"
+
+  if agent[:tenant_id] and agent[:tenant_password]
+    dsa_args << " \"tenantID:#{agent[:tenant_id]}\" \"tenantPassword:#{agent[:tenant_password]}\""
+  end
+
+  if agent[:activation][:sethost]
+    dsa_args << " hostname:#{agent[:activation][:sethost] }"
+  end
+
+  if agent[:policy_id]
+    dsa_args << " \"policyid:#{agent[:policy_id]}\""
+  elsif agent[:policy_name]
+    dsa_args << " \"policy:#{agent[:policy_name]}\""
+  end
+
+  dsa_control('-r',     'activate-r')
+  dsa_control(dsa_args, 'activate')
+
+  #confirm the agent is activated and create a file to prevent repeat activations
+  file activated_file_path do
+    content 'Delete this file to have chef reset & reactivate agent'
+    owner   'root'
+    group   'root'
+    mode     00600
+  end
+
+  Chef::Log.info('Activated the Deep Security agent')
+else
+  Chef::Log.info("#{activated_file_path} eists, will not reset and attempt to activated again")
 end
-
-if agent[:activation][:sethost]
-  dsa_args << " hostname:#{agent[:activation][:sethost] }"
-end
-
-if agent[:policy_id]
-	dsa_args << " \"policyid:#{agent[:policy_id]}\""
-elsif agent[:policy_name]
-	dsa_args << " \"policy:#{agent[:policy_name]}\""
-end
-
-dsa_control('-r',     'activate-r')
-dsa_control(dsa_args, 'activate')
-
-Chef::Log.info("Activated the Deep Security agent")

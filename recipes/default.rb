@@ -130,22 +130,18 @@ rescue
 end
 
 
-
-# Block the wait to ensure it's sequential
-ruby_block 'metadata_wait' do
-	block do
-		sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
-	end
-end
-Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready to activate"
-
-
-
-
-
 # Activate the agent (unless the 'activated' file has been created)
 activated_file_path = '/opt/ds_agent/activated'
 unless ::File.exist?(activated_file_path)
+
+  # Block the wait to ensure it's sequential
+  ruby_block 'metadata_wait' do
+    block do
+      sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
+    end
+  end
+  Chef::Log.info "ds_agent package installed. ds_agent service is running. Ready to activate"
+
   dsa_args = "-a dsm://#{agent[:activation][:hostname]}:#{agent[:activation][:port]}/"
 
   if agent[:tenant_id] and agent[:tenant_password]

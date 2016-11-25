@@ -131,7 +131,8 @@ end
 
 
 # Activate the agent (unless the 'activated' file has been created)
-activated_file_path = '/opt/ds_agent/activated'
+activated_file_path = node[:platform_family] == 'windows' ?  "#{ENV['ProgramFiles']}\\Trend Micro\\Deep Security Agent\\dsa_control" : '/opt/ds_agent/activated'
+
 unless ::File.exist?(activated_file_path)
 
   # Block the wait to ensure it's sequential

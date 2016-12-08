@@ -1,12 +1,16 @@
-.vagrant
-#/cookbooks
+# Mac
+.DS_Store
 
 # Bundler
 bin/*
 .bundle/*
 
+# test kitchen
 .kitchen/
 .kitchen.local.yml
 
-# Mac
-.DS_Store
+#berkshelf
+Berksfile.lock
+
+#rubymine
+.idea

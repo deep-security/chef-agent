@@ -1,0 +1,7 @@
+source 'https://supermarket.chef.io'
+
+metadata
+
+group :integration do
+  cookbook 'deep-security-agent-test', path: './test/cookbooks/deep-security-agent-test'
+end

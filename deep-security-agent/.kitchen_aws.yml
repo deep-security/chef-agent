@@ -1,0 +1,57 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: "<%= ENV['CHEF_AWS_SSH_KEY_ID']%>"
+  region: "<%= ENV['CHEF_AWS_REGION']%>"
+  availability_zone: "<%= ENV['CHEF_AWS_AVAILABILITY_ZONE']%>"
+  security_group_ids: "<%= ENV['CHEF_AWS_SECURITY_GROUP_ID']%>"
+  subnet_id: "<%= ENV['CHEF_AWS_SUBNET_ID']%>"
+  associate_public_ip: true
+  interface: dns
+  instance_type: t2.micro
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: true
+
+transport:
+  ssh_key: "<%= ENV['CHEF_AWS_USER_KEY']%>"
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: linux-amazon-64bit
+    transport:
+      username: ec2-user
+    driver:
+      image_id: ami-bf4193c7 #Amazon Linux AMI 2017.09.1 (HVM)
+      tags:
+        Name: Kitchen-amazon-linux
+        created-by: test-kitchen
+        Squad: "<%= ENV['CHEF_AWS_EC2_TAG_SQUAD']%>"
+        Trender: "<%= ENV['CHEF_AWS_EC2_TAG_TRENDER']%>"
+        ValidUntil: DO NOT STOP
+        workingHours: IGNORE
+      block_device_mappings:
+        - device_name: /dev/xvda
+          ebs:
+            volume_type: standard
+            volume_size: 20
+            delete_on_termination: true
+
+suites:
+  - name: default
+    run_list:
+      - recipe[deep-security-agent::default]
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:
+      deep_security_agent:
+        dsm_agent_download_hostname: "<%= ENV['CHEF_DSA_DOWNLOAD_HOSTNAME']%>"
+        dsm_agent_download_port: "<%= ENV['CHEF_DSA_DOWNLOAD_PORT']%>"
+        dsm_agent_activation_hostname: "<%= ENV['CHEF_DSA_ACTIVATION_HOSTNAME']%>"
+        dsm_agent_activation_port: "<%= ENV['CHEF_DSA_ACTIVATION_PORT']%>"
+        tenant_id: "<%= ENV['CHEF_DSA_TENANT_ID']%>"
+        token: "<%= ENV['CHEF_DSA_TOKEN']%>"

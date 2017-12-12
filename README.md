@@ -4,7 +4,7 @@ A cookbook of Chef recipes for the Deep Security agent. This allows for the easy
 
 ## Support
 
-This is a community project and while you will see contributions from the Deep Security team, there is no official Trend Micro support for this project. The official documentation for the Deep Security APIs is available from the [Trend Micro Online Help Centre](http://docs.trendmicro.com/en-us/enterprise/deep-security.aspx). 
+This is a community project and supported by Trend Micro Deep Security team.
 
 Tutorials, feature-specific help, and other information about Deep Security is available from the [Deep Security Help Center](https://help.deepsecurity.trendmicro.com/Welcome.html). 
 
@@ -42,8 +42,7 @@ The recipe settings will be along the lines of;
 ```javascript
 {
   "tenant_id": "11111111-2222-3333-4444-555555555555",
-  "policy_name": "Policy Name",
-  "tenant_password": "11111111-2222-3333-4444-555555555555"
+  "token": "11111111-2222-3333-4444-555555555555"
 }
 ```
 
@@ -70,4 +69,4 @@ We're always open to PRs from the community. To submit one:
 1. Make your changes
 1. Submit a PR with an explanation of what/why/cavaets/etc.
 
-We'll review and work with you to make sure that the fix gets pushed out quickly.
+We'll review and work with you to make sure that the fix gets pushed out quickly. For further help, please contact maintainer email deepsecurityopensource@trendmicro.com.

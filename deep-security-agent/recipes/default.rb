@@ -116,12 +116,17 @@ else
   end
 end
 
-Chef::Log.info "Downloaded DSA installer file size : #{File.size(local_file_path)} bytes"
 
-if not File.size?(local_file_path)
-  Chef::Log.error("Downloaded file size is not valid. There are two possiblities : 1. The OS platform is not supported. 2. Deep Security Manager don't provide agent software package installer for your OS platform.")
-  Chef::Log.error('Please verify that agent software package for your platform is available using this reference article https://help.deepsecurity.trendmicro.com/10/0/Get-Started/Install/import-agent-software.html?redirected=true&Highlight=download')
-  exit(false)
+ruby_block 'check_file_size' do
+  block do
+    Chef::Log.info "Downloaded DSA installer file size : #{File.size(local_file_path)} bytes"
+
+    if not File.size?(local_file_path)
+      Chef::Log.error("Downloaded file size is not valid. There are two possiblities : 1. The OS platform is not supported. 2. Deep Security Manager don't provide agent software package installer for your OS platform.")
+      Chef::Log.error('Please verify that agent software package for your platform is available using this reference article https://help.deepsecurity.trendmicro.com/10/0/Get-Started/Install/import-agent-software.html?redirected=true&Highlight=download')
+      exit(false)
+    end
+  end
 end
 
 # Install the agent
@@ -143,9 +148,11 @@ else
 end
 Chef::Log.info 'ds_agent package installed successfully'
 
-
-# Wait for the metadata to load
-sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
+ruby_block 'service_pre-start_wait' do
+  block do
+    sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
+  end
+end
 
 # Make sure the service is running
 Chef::Log.info 'Making sure that the ds_agent service has started'

@@ -41,8 +41,14 @@ The recipe settings will be along the lines of;
 
 ```javascript
 {
-  "tenant_id": "11111111-2222-3333-4444-555555555555",
-  "token": "11111111-2222-3333-4444-555555555555"
+  "deep_security_agent" : {
+    "dsm_agent_download_hostname": "app.deepsecurity.trendmicro.com",
+    "dsm_agent_download_port" : "443",
+    "dsm_agent_activation_hostname" : "agents.deepsecurity.trendmicro.com",
+    "dsm_agent_activation_port" : "443",
+    "tenant_id" : "<Deep Security DSAAS Tenant ID>",
+    "token" : "<Deep Security DSAAS Tenant Token>"
+  }
 }
 ```
 

@@ -148,6 +148,21 @@ else
 end
 Chef::Log.info 'ds_agent package installed successfully'
 
+
+require_activation = false
+ruby_block 'ds_agent_require_activation' do
+  block do
+    Chef::Log.info 'Service "ds_agent" has been installed, activation required'
+    require_activation = true
+  end
+  
+  # this resource won't run by default until notified by either dpkg_package[ds_agent], rpm_package[ds_agent], or package[ds_agent]
+  action :nothing
+  subscribes :run, 'dpkg_package[ds_agent]', :immediately
+  subscribes :run, 'rpm_package[ds_agent]', :immediately
+  subscribes :run, 'package[ds_agent]', :immediately
+end
+
 ruby_block 'service_pre-start_wait' do
   block do
     sleep(5) # this allows the agent to query the AWS metadata URL to gather the environment info
@@ -157,23 +172,28 @@ end
 # Make sure the service is running
 Chef::Log.info 'Making sure that the ds_agent service has started'
 begin
+  
   service 'ds_agent' do
     action :start
   end
+  
+  # Block the wait to ensure it's sequential
+  ruby_block 'metadata_wait' do
+    block do
+      Chef::Log.info 'ds_agent service is up and running, pausing to ensure all the local metadata has been collected'
+	  sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
+	  Chef::Log.info 'ds_agent package installed. ds_agent service is running.'
+    end
+  end
+  
 rescue
   Chef::Log.warn 'Could not start the service using the native Chef method'
 end
 
-Chef::Log.info 'ds_agent service is up and running, pausing to ensure all the local metadata has been collected'
-# Block the wait to ensure it's sequential
-ruby_block 'metadata_wait' do
-  block do
-    sleep(15) # this allows the agent to query the AWS metadata URL to gather the environment info
-  end
-end
-Chef::Log.info 'ds_agent package installed. ds_agent service is running. Ready to activate'
 
 # Activate the agent
+Chef::Log.info 'Starting to activate ds_agent.'
+
 dsa_args = "-a dsm://#{dsm_agent_activation_hostname}:#{dsm_agent_activation_port}/"
 if !tenant_id.to_s.empty? and !token.to_s.empty?
   dsa_args << " \"tenantID:#{tenant_id}\" \"tenantPassword:#{token}\""
@@ -191,13 +211,16 @@ if host_platform =~ /Windows/
     & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" -r
     & $Env:ProgramFiles"\\Trend Micro\\Deep Security Agent\\dsa_control" #{dsa_args}
     EOH
+	only_if { require_activation }
   end
 else
   execute 'activate_ds_agent' do
     command '/opt/ds_agent/dsa_control -r'
+	only_if { require_activation }
   end
   execute 'activate_ds_agent' do
     command "/opt/ds_agent/dsa_control #{dsa_args}"
+	only_if { require_activation }
   end
 end
 Chef::Log.info('Activated the Deep Security agent')

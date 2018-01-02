@@ -15,7 +15,7 @@
 #   the same hostname:port as the Deep Security Manager admin interface. For Marketplace and software deployments, pass
 #   this data through the 'dsm_agent_download_hostname' & 'dsm_agent_download_port' attributes.
 default['deep_security_agent']['dsm_agent_download_hostname'] = 'app.deepsecurity.trendmicro.com'
-default['deep_security_agent']['dsm_agent_download_port'] = '443'
+default['deep_security_agent']['dsm_agent_download_port'] = 443
 
 # For Marketplace and software deployments 'ignore_ssl_validation' must to set to 'true' 
 #    unless you've installed a verifiable SSL certificate.
@@ -26,7 +26,7 @@ default['deep_security_agent']['ignore_ssl_validation'] = false
 #    but 'dsm_agent_activation_port' is different than 'dsm_agent_download_port'. For Deep Security
 #    as a Service, it's the reverse to make it easy to configure only one outbound port.
 default['deep_security_agent']['dsm_agent_activation_hostname'] = 'agents.deepsecurity.trendmicro.com'
-default['deep_security_agent']['dsm_agent_activation_port'] = '443'
+default['deep_security_agent']['dsm_agent_activation_port'] = 443
 
 # For multi-tenant deployments of Deep Security (such as Deep Security as a Service), every tenant/organization
 #    is assigned a unique 'tenant_id' and 'tenant_password' that is only used for agent activation. You can
@@ -44,3 +44,7 @@ default['deep_security_agent']['token'] = nil
 # The ID of the policy you want to initialize the agent with. This takes precedence over the 
 #    'policy_name' setting. 
 default['deep_security_agent']['policy_id'] = nil
+
+
+# Whether to force re-activation even Deep Security Agent has been activated
+default['deep_security_agent']['force_reactivation'] = false

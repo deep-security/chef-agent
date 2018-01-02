@@ -14,17 +14,17 @@ verifier:
   name: inspec
 
 platforms:
- - name: linux-ubuntu-14.04
-   driver_config:
-     image_urn: Canonical:UbuntuServer:14.04.5-LTS:latest
-     vm_name: ubuntu14-vm
-     vm_tags:
-       ostype: linux
-       distro: ubuntu
-     azure_resource_group_prefix: kitchenub14
-   transport:
-     name: ssh
-     ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
+  - name: linux-ubuntu-14.04
+    driver_config:
+      image_urn: Canonical:UbuntuServer:14.04.5-LTS:latest
+      vm_name: ubuntu14-vm
+      vm_tags:
+        ostype: linux
+        distro: ubuntu
+      azure_resource_group_prefix: kitchenub14
+    transport:
+      name: ssh
+      ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
   - name: linux-ubuntu-16.04
     driver_config:
       image_urn: Canonical:UbuntuServer:16.04.0-LTS:latest
@@ -36,17 +36,17 @@ platforms:
     transport:
       name: ssh
       ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
- - name: linux-debian-7
-   driver_config:
-     image_urn: credativ:Debian:7:latest
-     vm_name: debian7-vm
-     vm_tags:
-       ostype: linux
-       distro: debian
-     azure_resource_group_prefix: kitchendeb7
-   transport:
-     name: ssh
-     ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
+  - name: linux-debian-7
+    driver_config:
+      image_urn: credativ:Debian:7:latest
+      vm_name: debian7-vm
+      vm_tags:
+        ostype: linux
+        distro: debian
+      azure_resource_group_prefix: kitchendeb7
+    transport:
+      name: ssh
+      ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
   - name: linux-debian-8
     driver_config:
       image_urn: credativ:Debian:8:latest
@@ -58,39 +58,39 @@ platforms:
     transport:
       name: ssh
       ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
- - name: linux-suse-11-SP4
-   driver_config:
-     image_urn: SUSE:SLES:11-SP4:latest
-     vm_name: suse11-vm
-     vm_tags:
-       ostype: linux
-       distro: suse
-     azure_resource_group_prefix: kitchensuse11
-   transport:
-     name: ssh
-     ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
- - name: linux-suse-12-SP3
-   driver_config:
-     image_urn: SUSE:SLES:12-SP3:latest
-     vm_name: suse12-vm
-     vm_tags:
-       ostype: linux
-       distro: suse
-     azure_resource_group_prefix: kitchensuse12
-   transport:
-     name: ssh
-     ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
- - name: linux-RHEL-6.9
-   driver_config:
-     image_urn: RedHat:RHEL:6.9:latest
-     vm_name: rhel6-vm
-     vm_tags:
-       ostype: linux
-       distro: rhel
-     azure_resource_group_prefix: kitchenrhel6
-   transport:
-     name: ssh
-     ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
+  - name: linux-suse-11-SP4
+    driver_config:
+      image_urn: SUSE:SLES:11-SP4:latest
+      vm_name: suse11-vm
+      vm_tags:
+        ostype: linux
+        distro: suse
+      azure_resource_group_prefix: kitchensuse11
+    transport:
+      name: ssh
+      ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
+  - name: linux-suse-12-SP3
+    driver_config:
+      image_urn: SUSE:SLES:12-SP3:latest
+      vm_name: suse12-vm
+      vm_tags:
+        ostype: linux
+        distro: suse
+      azure_resource_group_prefix: kitchensuse12
+    transport:
+      name: ssh
+      ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
+  - name: linux-RHEL-6.9
+    driver_config:
+      image_urn: RedHat:RHEL:6.9:latest
+      vm_name: rhel6-vm
+      vm_tags:
+        ostype: linux
+        distro: rhel
+      azure_resource_group_prefix: kitchenrhel6
+    transport:
+      name: ssh
+      ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
   - name: linux-RHEL-7.2
     driver_config:
       image_urn: RedHat:RHEL:7.2:latest
@@ -102,17 +102,17 @@ platforms:
     transport:
       name: ssh
       ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
- - name: linux-Oracle-6.9
-   driver_config:
-     image_urn: Oracle:Oracle-Linux:6.9:latest
-     vm_name: oraclelin69-vm
-     vm_tags:
-       ostype: linux
-       distro: oracle
-     azure_resource_group_prefix: kitchenoraclelinux69
-   transport:
-     name: ssh
-     ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
+  - name: linux-Oracle-6.9
+    driver_config:
+      image_urn: Oracle:Oracle-Linux:6.9:latest
+      vm_name: oraclelin69-vm
+      vm_tags:
+        ostype: linux
+        distro: oracle
+      azure_resource_group_prefix: kitchenoraclelinux69
+    transport:
+      name: ssh
+      ssh_key: "<%= ENV['CHEF_AZURE_VM_SSH_KEY']%>"
   - name: linux-Oracle-7.4
     driver_config:
       image_urn: Oracle:Oracle-Linux:7.4:latest
@@ -148,18 +148,18 @@ platforms:
       name: winrm
       username: "<%= ENV['CHEF_WINRM_USERNAME']%>"
       password: "<%= ENV['CHEF_WINRM_PASSWORD']%>"
- - name: windows-server-2016
-   driver_config:
-     image_urn: MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest
-     vm_name: win2016
-     vm_tags:
-       ostype: windows
-       distro: win2016
-     azure_resource_group_prefix: kitchenwin2016
-   transport:
-     name: winrm
-     username: "<%= ENV['CHEF_WINRM_USERNAME']%>"
-     password: "<%= ENV['CHEF_WINRM_PASSWORD']%>"
+  - name: windows-server-2016
+    driver_config:
+      image_urn: MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest
+      vm_name: win2016
+      vm_tags:
+        ostype: windows
+        distro: win2016
+      azure_resource_group_prefix: kitchenwin2016
+    transport:
+      name: winrm
+      username: "<%= ENV['CHEF_WINRM_USERNAME']%>"
+      password: "<%= ENV['CHEF_WINRM_PASSWORD']%>"
 
 
 suites:

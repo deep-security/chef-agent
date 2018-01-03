@@ -73,6 +73,6 @@ We're always open to PRs from the community. To submit one:
 1. Fork the repo
 1. Create a new feature branch
 1. Make your changes
-1. Submit a PR with an explanation of what/why/cavaets/etc.
+1. Submit a PR with an explanation of what/why/caveats/etc.
 
 We'll review and work with you to make sure that the fix gets pushed out quickly. For further help, please contact maintainer email deepsecurityopensource@trendmicro.com.

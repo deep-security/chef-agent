@@ -98,7 +98,7 @@ if host_platform =~ /Windows/
   local_file_path = "#{tmp_path}\\#{installer_file_name}"
 end
 
-agent_download_url = "https://#{dsm_agent_download_hostname}/software/agent/#{host_platform}#{host_platform_version}/#{arch_type}/"
+agent_download_url = "https://#{dsm_agent_download_hostname}:#{dsm_agent_download_port}/software/agent/#{host_platform}#{host_platform_version}/#{arch_type}/"
 
 Chef::Log.info "Local file: #{local_file_path}"
 Chef::Log.info "URL: #{agent_download_url}"

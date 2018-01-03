@@ -19,7 +19,7 @@ default['deep_security_agent']['dsm_agent_download_port'] = '443'
 
 # For Marketplace and software deployments 'ignore_ssl_validation' must to set to 'true' 
 #    unless you've installed a verifiable SSL certificate.
-default['deep_security_agent']['ignore_ssl_validation'] = 'false'
+default['deep_security_agent']['ignore_ssl_validation'] = false
 
 # Deep Security agents activate on a different port then the admin interface. For Marketplace and
 #    software deployments, 'dsm_agent_activation_hostname' is typically the same as 'dsm_agent_download_hostname'

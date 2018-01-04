@@ -12,7 +12,7 @@
 ########################
 
 # As you add agents to Deep Security, they are automatically made available for download through
-#   the same hostname:port as the admin interface. For Marketplace and software deployments, pass
+#   the same hostname:port as the Deep Security Manager admin interface. For Marketplace and software deployments, pass
 #   this data through the 'dsm_agent_download_hostname' & 'dsm_agent_download_port' attributes.
 default['deep_security_agent']['dsm_agent_download_hostname'] = 'app.deepsecurity.trendmicro.com'
 default['deep_security_agent']['dsm_agent_download_port'] = '443'
@@ -21,17 +21,17 @@ default['deep_security_agent']['dsm_agent_download_port'] = '443'
 #    unless you've installed a verifiable SSL certificate.
 default['deep_security_agent']['ignore_ssl_validation'] = false
 
-# Deep Security agents activate on a different port then the admin interface. For Marketplace and
+# Deep Security agents activate on a different port than the admin interface. For Marketplace and
 #    software deployments, 'dsm_agent_activation_hostname' is typically the same as 'dsm_agent_download_hostname'
-#    but 'dsm_agent_activation_port' will be different then 'dsm_agent_download_port'. For Deep Security
+#    but 'dsm_agent_activation_port' is different than 'dsm_agent_download_port'. For Deep Security
 #    as a Service, it's the reverse to make it easy to configure only one outbound port.
 default['deep_security_agent']['dsm_agent_activation_hostname'] = 'agents.deepsecurity.trendmicro.com'
 default['deep_security_agent']['dsm_agent_activation_port'] = '443'
 
 # For multi-tenant deployments of Deep Security (such as Deep Security as a Service), every tenant/organization
 #    is assigned a unique 'tenant_id' and 'tenant_password' that is only used for agent activation. You can
-#    find this info from the Support/Help > Deployment Scripts menu option in the admin. Select any agent
-#    and then check "Activate Agent automatically after installation". This will put the tenant_id and 
+#    find this info from the Support/Help > Deployment Scripts menu in the Deep Security Manager. Select any agent
+#    and then enable "Activate Agent automatically after installation". This places the tenant_id and 
 #    tenant_password in the script the wizard is building for you.
 default['deep_security_agent']['tenant_id'] = nil
 default['deep_security_agent']['token'] = nil

@@ -1,10 +1,10 @@
 # Chef
 
-A cookbook of Chef recipes for the Trend Micro Deep Security Agent. This allows for the easy deployment of the Trend Micro Deep Security Agent as well as taking some common actions from the agent.
+A cookbook of Chef recipes for the Trend Micro Deep Security Agent. The recipes allow you to easily deploy the Deep Security Agent and perform a few common agent tasks.
 
 ## Support
 
-This is a community project and supported by Trend Micro Deep Security team.
+This is a community project that is supported by the Deep Security team.
 
 Tutorials, feature-specific help, and other information about Deep Security is available from the [Deep Security Help Center](https://help.deepsecurity.trendmicro.com/Welcome.html). 
 
@@ -16,28 +16,28 @@ This repository is also setup for use from [AWS OpsWorks](https://aws.amazon.com
 
 To enable a custom cookbook:
 
-1. From within your stack, click the "Stack Settings" button
-1. On the stack setting page, click the blue "Edit" button
-1. Slide the "Use custom Chef cookbooks" toggle to "Yes"
-1. Set the follow:
+1. From within your stack, click the "Stack Settings" button.
+1. On the stack setting page, click the blue "Edit" button.
+1. Slide the "Use custom Chef cookbooks" toggle to "Yes".
+1. Set the input fields as follow:
 	- "Repository type": *git*
 	- "Repository URL": *https://github.com/deep-security/chef.git*
-1. Click the blue "Save" button
-1. On the "Deployments" page for your stack, click the gray "Run Command" button
+1. Click the blue "Save" button.
+1. On the "Deployments" page for your stack, click the gray "Run Command" button.
 
-If you have existing instances running, do the following;
+If you have existing instances running, do the following:
 
-1. Select "Update Custom Cookbooks" from the "Command" drop-down
-1. Click the blue, "Update Custom Cookbooks" button to run the command
+1. Select "Update Custom Cookbooks" from the "Command" drop-down.
+1. Click the blue, "Update Custom Cookbooks" button to run the command.
 
 In the Layers section of the OpsWorks Management Console, for your layer;
 
-1. Click Recipes
-1. Under "Custom Recipes", in the "*Configuration*" life cycle enter **deep-security-agent::default**
-1. Click the General Settings section
-1. In the "Custom JSON" section, enter the necessary recipe settings
+1. Click Recipes.
+1. Under "Custom Recipes", in the "*Configuration*" life cycle enter **deep-security-agent::default**.
+1. Click the General Settings section.
+1. In the "Custom JSON" section, enter the necessary recipe settings.
 
-The recipe settings will be along the lines of;
+The recipe settings will be along the lines of:
 
 ```javascript
 {
@@ -60,9 +60,9 @@ The recipes within this repo are now available to you from within your AWS OpsWo
 
 Since AWS OpsWorks only allows one custom cookbook per stack. You have to do a little extra work if you want to incorporate multiple custom cookbooks. Thankfully, git makes this easy. 
 
-1. Create a new repo that you will use as your custom cookbook
-1. Add each cookbook you want to use as a [```git submodule```](http://git-scm.com/docs/git-submodule)
-1. Create a symbolic link to the recipe at the top level of the new repo (```ln -s clone/recipe recipe```)
+1. Create a new repo that you will use as your custom cookbook.
+1. Add each cookbook you want to use as a [```git submodule```](http://git-scm.com/docs/git-submodule).
+1. Create a symbolic link to the recipe at the top level of the new repo (```ln -s clone/recipe recipe```).
 
 This will keep each of the customer cookbook in it's own git repo but allow you to point OpsWorks to one place.
 
@@ -70,9 +70,9 @@ This will keep each of the customer cookbook in it's own git repo but allow you 
 
 We're always open to PRs from the community. To submit one:
 
-1. Fork the repo
-1. Create a new feature branch
-1. Make your changes
+1. Fork the repo.
+1. Create a new feature branch.
+1. Make your changes.
 1. Submit a PR with an explanation of what/why/caveats/etc.
 
-We'll review and work with you to make sure that the fix gets pushed out quickly. For further help, please contact maintainer email deepsecurityopensource@trendmicro.com.
+We'll review and work with you to make sure that the fix gets pushed out quickly. For further help, please contact the Trend Micro open source support team at deepsecurityopensource@trendmicro.com.

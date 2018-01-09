@@ -12,7 +12,7 @@ For Deep Security specific issues, please use the regular Trend Micro support ch
 
 ## OpsWorks
 
-This repository is also setup for use from [AWS OpsWorks](https://aws.amazon.com/opsworks/). You can enable this as a *custom cookbook* within your stack. This makes is very easy to ensure that the Deep Security agent is running on all of the EC2 instances within your stack.
+This repository is also setup for use from [AWS OpsWorks](https://aws.amazon.com/opsworks/). You can enable this as a *custom cookbook* within your stack. This makes is very easy to ensure that the Deep Security Agent is running on all of the EC2 instances within your stack.
 
 To enable a custom cookbook:
 
@@ -64,7 +64,7 @@ Since AWS OpsWorks only allows one custom cookbook per stack. You have to do a l
 1. Add each cookbook you want to use as a [```git submodule```](http://git-scm.com/docs/git-submodule).
 1. Create a symbolic link to the recipe at the top level of the new repo (```ln -s clone/recipe recipe```).
 
-This will keep each of the customer cookbook in it's own git repo but allow you to point OpsWorks to one place.
+This will keep each of the customer cookbook in its own git repo but allow you to point OpsWorks to one place.
 
 ## Contributing
 

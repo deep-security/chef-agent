@@ -74,3 +74,7 @@ Make sure that you include 'deep-security-agent' in your node's 'run_list'. This
   ]
 }
 ```
+
+## Acknowledgment
+
+* We thank [Blair Hamilton](https://github.com/blairham) for his contributions to the [Deep Security Agent cookbook] (https://supermarket.chef.io/cookbooks/deep-security-agent).

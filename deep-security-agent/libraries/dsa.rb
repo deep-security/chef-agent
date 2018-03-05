@@ -108,10 +108,10 @@ module DSA_Helpers
 
     if certHash == nil || certHash == ''
       raise "Could not query Deep Security Agent certificate. Please make sure Deep Security Agent has been installed."
-    elsif !BOOTSTRAP_CERT.casecmp?(certHash)
-      activated = true
-    else
+    elsif (BOOTSTRAP_CERT.casecmp(certHash) == 0)
       activated = false
+    else
+      activated = true
     end
 
     Chef::Log.info "Check DSA activated returned : #{activated}"

@@ -15,6 +15,7 @@ dsm_agent_activation_port       = node['deep_security_agent']['dsm_agent_activat
 tenant_id                       = node['deep_security_agent']['tenant_id']
 token                           = node['deep_security_agent']['token']
 policy_id                       = node['deep_security_agent']['policy_id']
+group_id                        = node['deep_security_agent']['group_id']
 
 # Activate the agent
 Chef::Log.info 'Starting to activate ds_agent.'
@@ -26,6 +27,10 @@ end
 
 if policy_id
   dsa_args << " \"policyid:#{policy_id}\""
+end
+
+if group_id
+  dsa_args << " \"groupid:#{group_id}\""
 end
 
 Chef::Log.info "Running dsa_control with args: #{dsa_args}"

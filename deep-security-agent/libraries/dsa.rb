@@ -12,11 +12,11 @@ module DSA_Helpers
   PACKAGE_RPM = 'ds_agent.rpm'.freeze
   PACKAGE_DEB = 'ds_agent.deb'.freeze
   PACKAGE_MSI = 'ds_agent.msi'.freeze
-  
-  class DSAPlatform    
+
+  class DSAPlatform
     attr_accessor :host_platform, :host_platform_version, :installer_file_name, :arch_type
   end
-  
+
   def detect_DSA_host_platform
     currentDSAPlatform = DSAPlatform.new
     case node[:platform]
@@ -53,13 +53,13 @@ module DSA_Helpers
       currentDSAPlatform.host_platform_version = "#{/(\d+)/.match(node[:platform_version])[1]}"
       currentDSAPlatform.installer_file_name = PACKAGE_RPM
     end
-    
+
     # assume 64-bit but allow for 32-bit when detected
     currentDSAPlatform.arch_type = 'x86_64'
     if node['kernel']['machine'] =~ /32/
       currentDSAPlatform.arch_type = 'i386'
     end
-    
+
     Chef::Log.info "Ohai reporting: #{node[:platform]}, #{node[:platform_version]}, #{node[:kernel][:machine]}"
 	currentDSAPlatform
   end
@@ -68,7 +68,7 @@ module DSA_Helpers
   def is_DSA_activated?
 
     Chef::Log.info "Check if DSA activated"
-    
+
     activated = false
     dsa_query_command = ''
     dsa_query_parameter = '-c GetAgentStatus agentCertHash'
@@ -77,7 +77,7 @@ module DSA_Helpers
     else
       dsa_query_command = '/opt/ds_agent/dsa_query'
     end
-    
+
     for i in 0..5
       if File.exist?(dsa_query_command)
         break
@@ -108,7 +108,7 @@ module DSA_Helpers
 
     if certHash == nil || certHash == ''
       raise "Could not query Deep Security Agent certificate. Please make sure Deep Security Agent has been installed."
-    elsif !BOOTSTRAP_CERT.casecmp?(certHash)
+    elsif !BOOTSTRAP_CERT.casecmp(certHash)
       activated = true
     else
       activated = false
@@ -117,8 +117,8 @@ module DSA_Helpers
     Chef::Log.info "Check DSA activated returned : #{activated}"
     activated
   end
-  
-  
+
+
 
 end
 

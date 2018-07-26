@@ -44,7 +44,9 @@ if currentDSAPlatform.host_platform =~ /Windows/
   local_file_path = "#{tmp_path}\\#{currentDSAPlatform.installer_file_name}"
 end
 
-agent_download_url = "https://#{dsm_agent_download_hostname}:#{dsm_agent_download_port}/software/agent/#{currentDSAPlatform.host_platform}#{currentDSAPlatform.host_platform_version}/#{currentDSAPlatform.arch_type}/"
+## setting agent_download_url as a chef attribute to it can be overridden from a wrapper cookbook
+node.default['agent_download_url'] = "https://#{dsm_agent_download_hostname}:#{dsm_agent_download_port}/software/agent/#{currentDSAPlatform.host_platform}#{currentDSAPlatform.host_platform_version}/#{currentDSAPlatform.arch_type}/"
+agent_download_url = node.default['agent_download_url']
 
 Chef::Log.info "Local file: #{local_file_path}"
 Chef::Log.info "URL: #{agent_download_url}"
@@ -100,11 +102,11 @@ Chef::Log.info 'ds_agent package installed successfully'
 # Make sure the service is running
 Chef::Log.info 'Making sure that the ds_agent service has started'
 begin
-  
+
   service 'ds_agent' do
     action :start
   end
-  
+
   # Block the wait to ensure it's sequential
   ruby_block 'metadata_wait' do
     block do
@@ -113,7 +115,7 @@ begin
       Chef::Log.info 'ds_agent package installed. ds_agent service is running.'
     end
   end
-  
+
 rescue
   Chef::Log.warn 'Could not start the service using the native Chef method'
 end

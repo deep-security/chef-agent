@@ -20,8 +20,12 @@ policy_id                       = node['deep_security_agent']['policy_id']
 Chef::Log.info 'Starting to activate ds_agent.'
 
 dsa_args = "-a dsm://#{dsm_agent_activation_hostname}:#{dsm_agent_activation_port}/"
-if !tenant_id.to_s.empty? and !token.to_s.empty?
-  dsa_args << " \"tenantID:#{tenant_id}\" \"tenantPassword:#{token}\""
+if !tenant_id.to_s.empty?
+  dsa_args << " \"tenantID:#{tenant_id}\""
+end
+
+if !token.to_s.empty?
+  dsa_args << " \"tenantPassword:#{token}\""
 end
 
 if policy_id

@@ -22,7 +22,7 @@ module DSA_Helpers
     case node[:platform]
     when /amazon/
       currentDSAPlatform.host_platform = 'amzn'
-      currentDSAPlatform.host_platform_version = '1'
+      currentDSAPlatform.host_platform_version = node[:platform_version] == '2' ? '2' : '1'
       currentDSAPlatform.installer_file_name = PACKAGE_RPM
     when /redhat/, /centos/
       currentDSAPlatform.host_platform = 'RedHat_EL'

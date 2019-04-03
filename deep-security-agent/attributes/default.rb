@@ -45,6 +45,9 @@ default['deep_security_agent']['token'] = nil
 #    'policy_name' setting. 
 default['deep_security_agent']['policy_id'] = nil
 
+# The ID of the group you want to initialize the agent with.
+default['deep_security_agent']['group_id'] = nil
+
 # The ID of the relay group you want to initialize the agent with.
 default['deep_security_agent']['relaygroup_id'] = nil
 

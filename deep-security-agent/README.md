@@ -23,6 +23,7 @@ Key | Type | Description | Default
 ['tenant_id'] | String | In a multi-tenant installation (like Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
 ['token'] | String | In a multi-tenant installation (like Trend Micro Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
 ['policy_id'] | String | The Deep Security ID assigned to the policy to apply to the agents on activation. | nil
+['group_id'] | String | The Deep Security ID assigned to the groupid to apply to the agents on activation. | nil
 ['relaygroup_id'] | String | The Deep Security ID assigned to the relay group to apply to the agents on activation. | nil
 ['force_reactivation'] | Boolean | Whether to force re-activation even Deep Security Agent has been activated. | false
 
@@ -49,6 +50,7 @@ Key | Type | Description | Default
 ['tenant_id'] | String | In a multi-tenant installation (like Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
 ['token'] | String | In a multi-tenant installation (like Trend Micro Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
 ['policy_id'] | String | The Deep Security ID assigned to the policy to apply to the agents on activation. | nil
+['group_id'] | String | The Deep Security ID assigned to the groupid to apply to the agents on activation. | nil
 ['relaygroup_id'] | String | The Deep Security ID assigned to the relay group to apply to the agents on activation. | nil
 ['force_reactivation'] | Boolean | Whether to force re-activation even Deep Security Agent has been activated. | false
 

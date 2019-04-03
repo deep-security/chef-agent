@@ -1,78 +1,84 @@
-# Chef
+A collection of recipes to help deploy and manage the Trend Micro Deep Security Agent.
 
-A cookbook of Chef recipes for the Trend Micro Deep Security Agent. The recipes allow you to easily deploy the Deep Security Agent and perform a few common agent tasks.
+## Requirements
 
-## Support
+All of the recipes in this cookbook require a working Deep Security infrastructure. The key component is the Trend Micro Deep Security Manager. The agents (which these recipes help you manage) do the heavy lifting but the manager gives the marching orders. 
 
-This is a community project that is supported by the Deep Security team.
+There are no specific technical requirements beyond a standard Chef deployment.
 
-Tutorials, feature-specific help, and other information about Deep Security is available from the [Deep Security Help Center](https://help.deepsecurity.trendmicro.com/Welcome.html). 
 
-For Deep Security specific issues, please use the regular Trend Micro support channels. For issues with the code in this repository, please [open an issue here on GitHub](https://github.com/deep-security/chef/issues).
+## Attributes
 
-## OpsWorks
+#### Recipe : deep-security-agent::default
 
-This repository is also setup for use from [AWS OpsWorks](https://aws.amazon.com/opsworks/). You can enable this as a *custom cookbook* within your stack. This makes is very easy to ensure that the Deep Security Agent is running on all of the EC2 instances within your stack.
+The "default" recipe runs the "deep-security-agent::dsa-install" and "deep-security-agent::dsa-activate" recipes internally.
 
-To enable a custom cookbook:
+Key | Type | Description | Default
+----|------|-------------|--------
+['dsm_agent_download_hostname'] | String | Hostname of the Deep Security Manager. | app.deepsecurity.trendmicro.com
+['dsm_agent_download_port'] | Int | The port to connect to the Deep Security Manager to download the agents. This is typically the same port as the one used to access the Deep Security Manager admin interface. | 443
+['ignore_ssl_validation'] | Boolean |  Whether or not to ignore the SSL certificate validation for agent downloads. Marketplace and software deployments ship with self-signed certificates and require this set to 'true'. | false
+['dsm_agent_activation_hostname'] | String | The hostname for the agents to communicate with once deployed. For Marketplace and software deployments this is typically the same hostname as 'dsm_agent_download_hostname'. | agents.deepsecurity.trendmicro.com
+['dsm_agent_activation_port'] | Int | The port to use for the agent heartbeat (the regular communication). For Marketplace and software deployments, the default is 4120. | 443
+['tenant_id'] | String | In a multi-tenant installation (like Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
+['token'] | String | In a multi-tenant installation (like Trend Micro Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
+['policy_id'] | String | The Deep Security ID assigned to the policy to apply to the agents on activation. | nil
+['group_id'] | String | The Deep Security ID assigned to the groupid to apply to the agents on activation. | nil
+['relaygroup_id'] | String | The Deep Security ID assigned to the relay group to apply to the agents on activation. | nil
+['force_reactivation'] | Boolean | Whether to force re-activation even Deep Security Agent has been activated. | false
 
-1. From within your stack, click the "Stack Settings" button.
-1. On the stack setting page, click the blue "Edit" button.
-1. Slide the "Use custom Chef cookbooks" toggle to "Yes".
-1. Set the input fields as follow:
-	- "Repository type": *git*
-	- "Repository URL": *https://github.com/deep-security/chef.git*
-1. Click the blue "Save" button.
-1. On the "Deployments" page for your stack, click the gray "Run Command" button.
 
-If you have existing instances running, do the following:
+#### Recipe : deep-security-agent::dsa-install
 
-1. Select "Update Custom Cookbooks" from the "Command" drop-down.
-1. Click the blue, "Update Custom Cookbooks" button to run the command.
+"dsa-install" recipe will download and install the Deep Security Agent service. Installation will be skipped if agent with same version already installed. If downloaded Deep Security Installer version is newer, then version upgrade will be performed.
 
-In the Layers section of the OpsWorks Management Console, for your layer;
+Key | Type | Description | Default
+----|------|-------------|--------
+['dsm_agent_download_hostname'] | String | Hostname of the Deep Security Manager. | app.deepsecurity.trendmicro.com
+['dsm_agent_download_port'] | Int | The port to connect to the Deep Security Manager to download the agents. This is typically the same port as the one used to access the Deep Security Manager admin interface. | 443
+['ignore_ssl_validation'] | Boolean |  Whether or not to ignore the SSL certificate validation for agent downloads. Marketplace and software deployments ship with self-signed certificates and require this set to 'true'. | false
 
-1. Click Recipes.
-1. Under "Custom Recipes", in the "*Configuration*" life cycle enter **deep-security-agent::default**.
-1. Click the General Settings section.
-1. In the "Custom JSON" section, enter the necessary recipe settings.
 
-The recipe settings will be along the lines of:
+#### Recipe : deep-security-agent::dsa-activate
 
-```javascript
+"dsa-activate" recipe will activate the Deep Security Agent service by registering into Trend Micro Deep Security Manager. By default, this recipe will skip activation if agent already in activated state, unless 'force_reactivation' attribute is set to 'true'.
+
+Key | Type | Description | Default
+----|------|-------------|--------
+['dsm_agent_activation_hostname'] | String | The hostname for the agents to communicate with once deployed. For Marketplace and software deployments this is typically the same hostname as 'dsm_agent_download_hostname'. | agents.deepsecurity.trendmicro.com
+['dsm_agent_activation_port'] | Int | The port to use for the agent heartbeat (the regular communication). For Marketplace and software deployments, the default is 4120. | 443
+['tenant_id'] | String | In a multi-tenant installation (like Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
+['token'] | String | In a multi-tenant installation (like Trend Micro Deep Security as a Service), this identifies the tenant account to register the agent with. | nil
+['policy_id'] | String | The Deep Security ID assigned to the policy to apply to the agents on activation. | nil
+['group_id'] | String | The Deep Security ID assigned to the groupid to apply to the agents on activation. | nil
+['relaygroup_id'] | String | The Deep Security ID assigned to the relay group to apply to the agents on activation. | nil
+['force_reactivation'] | Boolean | Whether to force re-activation even Deep Security Agent has been activated. | false
+
+## Usage
+
+#### Recipe : deep-security-agent::default
+
+Make sure that you include 'deep-security-agent' in your node's 'run_list'. This ensures that the Deep Security Agent is installed (it's the default.rb recipe).
+
+```json
 {
-  "deep_security_agent" : {
-    "dsm_agent_download_hostname": "app.deepsecurity.trendmicro.com",
-    "dsm_agent_download_port" : "443",
-    "dsm_agent_activation_hostname" : "agents.deepsecurity.trendmicro.com",
-    "dsm_agent_activation_port" : "443",
-    "tenant_id" : "<Deep Security DSAAS Tenant ID>",
-    "token" : "<Deep Security DSAAS Tenant Token>"
-  }
+  "name":"my_node",
+  "default_attributes": {
+    "deep_security_agent" : {
+      "dsm_agent_download_hostname": "app.deepsecurity.trendmicro.com",
+      "dsm_agent_download_port" : "443",
+      "dsm_agent_activation_hostname" : "agents.deepsecurity.trendmicro.com",
+      "dsm_agent_activation_port" : "443",
+      "tenant_id" : "<Deep Security DSAAS Tenant ID>",
+      "token" : "<Deep Security DSAAS Tenant Token>"
+	}
+  },
+  "run_list": [
+    "recipe[deep-security-agent::default]"
+  ]
 }
 ```
 
-The recipes within this repo are now available to you from within your AWS OpsWorks stack.
+## Acknowledgment
 
-### Multiple custom cookbooks
-
-**--This technique is still being tested--**
-
-Since AWS OpsWorks only allows one custom cookbook per stack. You have to do a little extra work if you want to incorporate multiple custom cookbooks. Thankfully, git makes this easy. 
-
-1. Create a new repo that you will use as your custom cookbook.
-1. Add each cookbook you want to use as a [```git submodule```](http://git-scm.com/docs/git-submodule).
-1. Create a symbolic link to the recipe at the top level of the new repo (```ln -s clone/recipe recipe```).
-
-This will keep each of the customer cookbook in its own git repo but allow you to point OpsWorks to one place.
-
-## How to contribute
-
-We're always open to PRs from the community. To submit one:
-
-1. Fork the repo.
-1. Create a new feature branch.
-1. Make your changes.
-1. Submit a PR with an explanation of your changes or additions.
-
-We'll review and work with you to make sure that the fix gets pushed out quickly. For further help, please contact the Trend Micro open source support team at deepsecurityopensource@trendmicro.com.
+* We thank [Blair Hamilton](https://github.com/blairham) for his contributions to the [Deep Security Agent cookbook] (https://supermarket.chef.io/cookbooks/deep-security-agent).

@@ -3,7 +3,7 @@ maintainer       'Trend Micro'
 maintainer_email 'deepsecurityopensource@trendmicro.com'
 license          'Apache-2.0'
 description      'Installs/Configures the Workload Security Agent'
-version          '2.0.1'
+version          '2.0.2'
 
 %w( amazon centos debian fedora oracle redhat ubuntu ).each do |os|
   supports os

@@ -11,7 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial scripts from [@nimesh-jethwa](https://github.com/nimesh-jethwa).
+- New refreshed chef cookbook from [@nimesh-jethwa](https://github.com/nimesh-jethwa).
+- Recipes to download and install the agent via recommended approached ie. deployment scripts.
 
-[Unreleased]: https://github.com/deep-security/chef-agent/compare/v2.0.0...HEAD
+## [2.0.1] - 2020-04-17
+
+### Added
+
+- Add required metadata to the chef cookbook.
+
+[Unreleased]: https://github.com/deep-security/chef-agent/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/deep-security/chef-agent/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/deep-security/chef-agent/releases/tag/v2.0.0

@@ -8,7 +8,7 @@ This repository contains a cookbook to help deploy the Trend Micro Workload Secu
 
 ## Requirements
 
-Compatible version(s) of Cloud One - Workload Security or Deep Security Manager/Agent 12.0+. Chef 12+. Tested on Amazon Linux 1.
+Compatible version(s) of Cloud One - Workload Security or Deep Security Manager/Agent 12.0+. Chef 12.18+. Supports Amazon, CentOS, Debian, Fedora, Oracle, Redhat and Ubuntu platforms. Cookbook tested on Amazon.
 
 ## Usage
 

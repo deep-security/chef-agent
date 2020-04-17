@@ -1,0 +1,17 @@
+default['workload-security-agent']['api']['url'] = 'https://app.deepsecurity.trendmicro.com/api'
+default['workload-security-agent']['api']['secret']['key'] = '' # If not set, then retrieve secret through secret provider
+default['workload-security-agent']['api']['secret']['provider'] = '' # Only currently supports 'aws-ssm'
+default['workload-security-agent']['api']['secret']['aws-ssm']['path'] = '' # aws-ssm parameter name
+default['workload-security-agent']['api']['secret']['aws-ssm']['with-decryption'] = true # true if parameter type is SecureString
+default['workload-security-agent']['deployment-script']['endpoint'] = '/agentdeploymentscripts'
+default['workload-security-agent']['deployment-script']['headers']['Content-Type'] = 'application/json'
+default['workload-security-agent']['deployment-script']['headers']['API-Version'] = 'v1'
+default['workload-security-agent']['deployment-script']['body']['platform'] = 'linux'
+default['workload-security-agent']['deployment-script']['body']['validateCertificateRequired'] = 'true'
+default['workload-security-agent']['deployment-script']['body']['validateDigitalSignatureRequired'] = 'false'
+default['workload-security-agent']['deployment-script']['body']['activationRequired'] = 'true'
+default['workload-security-agent']['deployment-script']['body']['dsmProxyID'] = ''
+default['workload-security-agent']['deployment-script']['body']['relayProxyID'] = ''
+default['workload-security-agent']['deployment-script']['body']['policyID'] = ''
+default['workload-security-agent']['deployment-script']['body']['computerGroupID'] = ''
+default['workload-security-agent']['deployment-script']['outfile'] = '/tmp/AgentDeploymentScript.sh'
